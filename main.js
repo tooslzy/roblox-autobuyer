@@ -114,7 +114,7 @@ async function purchaseItem(item) {
 	let tries = 1
 	const tryPurchase = async () => {
 		const res = await requestWithAuth("POST", url, body, true)
-		console.log(res.status, "| try", tries, "|", url)
+		console.log("status:", res.status, "| tries", tries)
 
 		if (res.status === 429 && tries <= 5) {
 			tries += 1
@@ -141,18 +141,27 @@ while (true) {
 	console.log()
 
 	for (const i of items) {
+		const cleanName = i.name
+			.replaceAll(/[^A-Za-z0-9]+/gis, " ")
+			.trim()
+			.replaceAll(/\s+/gis, "-")
+		const catalogUrl = `https://www.roblox.com/${i.itemType == "Bundle" ? "bundles" : "catalog"}/${i.id}/${cleanName}`
+
 		const owned = await checkItemOwnership(i.itemType, i.id)
 		if (owned) {
 			console.log(`Owned "${i.name}" | ${i.itemType} | ID: ${i.id}`)
+			console.log(catalogUrl)
 		} else {
 			console.log(`Purchasing "${i.name}" | ${i.itemType} | ID: ${i.id}`)
+			console.log(catalogUrl)
+
 			const purchaseData = await purchaseItem(i)
 			console.log(`Purchased: ${purchaseData.purchased ? "✅" : "❌"}`)
 			if (!purchaseData.purchased) {
 				console.log(purchaseData)
 			}
-			console.log()
 		}
+		console.log()
 	}
 
 	if (nextPageCursor) {
