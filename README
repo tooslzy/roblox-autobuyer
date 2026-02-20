@@ -1,0 +1,7 @@
+roblox-autobuyer
+
+Automatically buys free items from the Roblox catalog.
+
+# How to use
+Add your cookie to ./cookie.txt and run the script with deno:
+deno run --allow-all ./main.js
