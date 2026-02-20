@@ -92,7 +92,7 @@ async function checkItemOwnership(itemType, itemId) {
 let purchasesCount = 0
 async function purchaseItem(item) {
 	purchasesCount = (purchasesCount + 1) % 3
-	await sleep(purchasesCount === 0 ? 5e3 : 2e3)
+	await sleep(purchasesCount === 0 ? 3e3 : 1e3)
 
 	const detailsRes = await requestWithAuth("POST", "https://apis.roblox.com/marketplace-items/v1/items/details", { itemIds: [item.collectibleItemId] })
 	const details = await detailsRes.json()
