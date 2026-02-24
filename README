@@ -2,6 +2,9 @@ roblox-autobuyer
 
 Automatically buys free items from the Roblox catalog.
 
+# Requirements
+Deno - https://docs.deno.com/runtime/getting_started/installation/
+
 # How to use
-Add your cookie to ./cookie.txt and run the script with deno:
+Add your cookie to ./cookie.txt and run the script with Deno:
 deno run --allow-all ./main.js
